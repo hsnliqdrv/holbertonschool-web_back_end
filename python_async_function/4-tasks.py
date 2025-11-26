@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """4-tasks
 
-Returning tasks
+Coroutines and concurrency
 """
 import asyncio
+import typing
 
 
-def task_wait_n(n: int, max_delay: int) -> asyncio.Task:
-    """Returns a wait_n task"""
-    wait_n = __import__('1-concurrent_coroutines').wait_n
-    return asyncio.create_task(wait_n(n, max_delay))
+async def task_wait_n(n: int, max_delay: int) -> typing.List[float]:
+    """Spawn wait_random n times and return delays in ascending order"""
+    task_wait_random = __import__('3-tasks').task_wait_random
+    tasks = [task_wait_random(max_delay) for _ in range(n)]
+    results = []
+    for task in asyncio.as_completed(tasks):
+        res = await task
+        results.append(res)
+    return results
