@@ -39,7 +39,7 @@ class Server:
         start, end = index_range(page, page_size)
         return self.dataset()[start:end]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """Gets hypermedia metadata from dataset"""
         l = len(self.dataset())
         pages = get_page(page, page_size)
@@ -49,7 +49,7 @@ class Server:
         metadata['data'] = pages
         next_page_exists = index_range(page + 1, page_size)[0] < l
         metadata['next_page'] = None if not next_page_exists else page + 1
-        metadata['prev_page'] = None if page == 1 else page - 1
+        metadata['prev_page'] = None if page <= 1 else page - 1
         metadata['total_pages'] = math.ceil(l / page_size)
         return metadata
 
