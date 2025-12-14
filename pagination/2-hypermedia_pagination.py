@@ -41,15 +41,14 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """Gets hypermedia metadata from dataset"""
-        l = len(self.dataset())
+        length = len(self.dataset())
         pages = self.get_page(page, page_size)
         metadata = {}
         metadata['page_size'] = len(pages)
         metadata['page'] = page
         metadata['data'] = pages
-        next_page_exists = index_range(page + 1, page_size)[0] < l
+        next_page_exists = index_range(page + 1, page_size)[0] < length
         metadata['next_page'] = None if not next_page_exists else page + 1
         metadata['prev_page'] = None if page <= 1 else page - 1
         metadata['total_pages'] = math.ceil(l / page_size)
         return metadata
-
