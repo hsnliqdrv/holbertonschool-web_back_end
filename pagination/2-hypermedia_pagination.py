@@ -42,7 +42,7 @@ class Server:
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """Gets hypermedia metadata from dataset"""
         l = len(self.dataset())
-        pages = get_page(page, page_size)
+        pages = self.get_page(page, page_size)
         metadata = {}
         metadata['page_size'] = len(pages)
         metadata['page'] = page
