@@ -1,2 +1,2 @@
 // count docs
-print(db.school.countDocuments({}))
+db.school.count({})
