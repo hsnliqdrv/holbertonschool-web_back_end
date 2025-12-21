@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
-"""10-update_topics.py"""
+"""10-update_topics"""
+
 
 def update_topics(mongo_collection, name, topics):
+    """ function that changes all topics of a school
+        document based on the name
     """
-    Updates the topics of a school document based on the name,
-    only if it does not already have topics.
-    """
-    mongo_collection.update_many(
-        {"name": name, "topics": {"$exists": False}},  # filter
-        {"$set": {"topics": topics}}                  # update
-    )
-
+    mongo_collection.update_many({"name": name}, {"$set": {"topics": topics}})
