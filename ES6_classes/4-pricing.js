@@ -6,7 +6,7 @@ export default class Pricing {
       throw new Error('Amount must be a number');
     }
     if (!(currency instanceof Currency)) {
-      throw new Error('Currency must be an object');
+      throw new Error('Currency must be an object of type Currency');
     }
     this._amount = amount;
     this._currency = currency;
@@ -24,14 +24,14 @@ export default class Pricing {
     return `${this._amount} ${this._currency.displayFullCurrency()}`;
   }
 
-  static convertPrice(price, conversionRate) {
-    if (!(price instanceof Pricing)) {
-      throw new Error('Price must be an instance of Pricing');
+  static convertPrice(amount, conversionRate) {
+    if (typeof amount !== 'number') {
+      throw new Error('Amount must be a number');
     }
     if (typeof conversionRate !== 'number') {
       throw new Error('Conversion rate must be a number');
     }
-    const newAmount = price.amount * conversionRate;
+    const newAmount = amount * conversionRate;
     return new Pricing(newAmount, price.currency);
   }
 }
