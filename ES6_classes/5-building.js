@@ -1,8 +1,5 @@
 export default class Building {
     constructor(sqft) {
-        if (new.target === Building) {
-            throw new Error("Base is abstract");
-        }
         if (this.evacuationWarningMessage === Building.prototype.evacuationWarningMessage) {
             throw new Error("Class extending Building must override evacuationWarningMessage");
         }
