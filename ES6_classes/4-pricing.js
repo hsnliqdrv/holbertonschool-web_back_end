@@ -32,6 +32,6 @@ export default class Pricing {
       throw new Error('Conversion rate must be a number');
     }
     const newAmount = amount * conversionRate;
-    return new Pricing(newAmount, price.currency);
+    return newAmount;
   }
 }
