@@ -1,4 +1,7 @@
 function cleanSet(set, startString) {
+    if (!(set instanceof Set) || typeof startString !== 'string') {
+        return '';
+    }
     const result = [];
     for (const item of set) {
         if (!item || typeof item !== 'string') {
